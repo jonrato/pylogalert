@@ -1,9 +1,14 @@
 import os
+from dotenv import load_dotenv
 import pylogalert as log
 from pylogalert.notify import Notifier
 from pylogalert.notify_slack import slack_webhook
 
+# Load .env file
+load_dotenv()
+
 WEBHOOK = os.environ["SLACK_WEBHOOK"]
+
 notifier = Notifier(
     channels=[slack_webhook(WEBHOOK)],
     rate_limit=("6/min", 5),
