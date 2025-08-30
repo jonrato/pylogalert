@@ -27,5 +27,21 @@ dependencies = [
 Homepage = "https://github.com/jonrato/pylogalert"
 Issues = "https://github.com/jonrato/pylogalert/issues"
 
+[tool.hatch.build]
+exclude = [
+  "/venv",
+  "/.venv",
+  "/dist",
+  "/build",
+  "/.git",
+  "/.github",
+  "/.mypy_cache",
+  "/.pytest_cache",
+  "**/__pycache__",
+  "*.pyc",
+  ".DS_Store"
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/pylogalert"]
+

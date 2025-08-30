@@ -130,7 +130,9 @@ def configure(
     if env: _config.env = env
     if level: _config.level = level
     if stream: _config.stream = stream
-    if sample is not None: _config.sample = sample
+
+    _config.sample = sample if sample is not None else {}
+
     _config.tz_utc = tz_utc
     if extra_static: _config.extra_static = extra_static
     if color is not None: _config.color = color

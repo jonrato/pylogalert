@@ -90,7 +90,7 @@ def test_emergency_ignores_sampling():
     assert data["level"] == "EMERGENCY"
 
 # -------------------------
-# Isolamento de contexto
+# Context isolation
 # -------------------------
 class ListHandler(logging.Handler):
     def __init__(self):
@@ -100,10 +100,8 @@ class ListHandler(logging.Handler):
         self.messages.append(self.format(record))
 
 def test_context_isolation():
-    # configura normalmente (stream é irrelevante aqui)
     log.configure(service="t", env="test")
 
-    # anexa um handler em memória com o mesmo formatter da lib
     logger = logging.getLogger("pylogalert")
     logger.handlers.clear()
     lh = ListHandler()
@@ -111,13 +109,11 @@ def test_context_isolation():
     logger.addHandler(lh)
     logger.setLevel(logging.INFO)
 
-    # logs com/sem contexto
     log.set_context(request_id="r1")
     log.info("first")
     log.clear_context()
     log.info("second")
 
-    # valida: 2 logs capturados
     assert len(lh.messages) == 2, lh.messages
 
     first = json.loads(lh.messages[0])
