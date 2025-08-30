@@ -7,7 +7,8 @@ import sys
 import uuid 
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, Iterable, Optional
+from types import TracebackType
+from typing import Any, Dict, Tuple, Iterable, Optional, cast
 from contextvars import ContextVar
 
 # ---------- State/Config ----------
@@ -84,17 +85,17 @@ def _color_enabled() -> bool:
 
 # ---------- Formatter JSON ----------
 class JsonFormatter(logging.Formatter):
-    COLORS = {
-        "DEBUG": "\033[37m",     # gray
-        "INFO": "\033[36m",      # cyan
-        "WARNING": "\033[33m",   # yellow
-        "ERROR": "\033[31m",     # red
-        "CRITICAL": "\033[35m",  # magenta
-        "EMERGENCY": "\033[41m", # red background
+    COLORS: Dict[str, str] = {
+        "DEBUG": "\033[37m",      # gray
+        "INFO": "\033[36m",       # cyan
+        "WARNING": "\033[33m",    # yellow
+        "ERROR": "\033[31m",      # red
+        "CRITICAL": "\033[35m",   # magenta
+        "EMERGENCY": "\033[41m",  # red background
     }
     RESET = "\033[0m"
 
-    def format(self, record: logging.LogRecord) -> str:
+    def format(self, record: logging.LogRecord) -> str:  # type: ignore[override]
         data: Dict[str, Any] = {
             "ts": _iso_ts(),
             "level": record.levelname,
@@ -103,18 +104,33 @@ class JsonFormatter(logging.Formatter):
             "event": getattr(record, "event", record.getMessage()),
             **_config.extra_static,
         }
-        data.update(get_context())
-        extra = getattr(record, "extra_fields", {})
-        data.update(extra)
-        if record.exc_info:
-            data["exc_type"] = str(record.exc_info[0].__name__)
-            data["exc_message"] = str(record.exc_info[1])
-            data["stack"] = self.formatException(record.exc_info)
 
+        # merge request/task context
+        data.update(get_context())
+
+        # merge ad-hoc fields
+        extra_fields = getattr(record, "extra_fields", {})
+        if isinstance(extra_fields, dict):
+            data.update(extra_fields)
+
+        # structured exception (handle Optional[ExcInfo])
+        if record.exc_info:
+            etype, evalue, etb = cast(
+                Tuple[type[BaseException], BaseException, TracebackType],
+                record.exc_info,
+            )
+            data["exc_type"] = etype.__name__
+            data["exc_message"] = str(evalue)
+            data["stack"] = self.formatException((etype, evalue, etb))
+
+        # redaction + JSON line
         text = json.dumps(_redact(data), ensure_ascii=False)
+
+        # optional color for TTY/dev
         if _color_enabled():
             color = self.COLORS.get(record.levelname, "")
-            return f"{color}{text}{self.RESET}"
+            if color:
+                return f"{color}{text}{self.RESET}"
         return text
 
 
