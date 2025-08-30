@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pylogalert"
-version = "0.1.6"
+version = "0.1.6.1"
 description = "Lean JSON logging with async-safe context, PII redaction, sampling, and EMERGENCY alerts."
 readme = "README.md"
 requires-python = ">=3.9"
