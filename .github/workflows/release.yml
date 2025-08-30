@@ -10,6 +10,8 @@ permissions:
   contents: read
   id-token: write
 
+environment: pypi
+
 jobs:
   test:
     runs-on: ubuntu-latest
