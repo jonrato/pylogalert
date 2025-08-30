@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pylogalert"
+version = "0.1.0"
+description = "Lean JSON logging with async-safe context, PII redaction, sampling, and EMERGENCY alerts."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+  {name = "Jonatas Ferreira Viana Silva", email = "jonatas_ferreira@usp.br"}
+]
+keywords = ["logging", "json", "observability", "fastapi", "django"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Typing :: Typed"
+]
+
+dependencies = [
+  "boto3>=1.34"
+]
+
+[project.urls]
+Homepage = "https://github.com/jonrato/pylogalert"
+Issues = "https://github.com/jonrato/pylogalert/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pylogalert"]
