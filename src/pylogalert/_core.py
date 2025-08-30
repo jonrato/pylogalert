@@ -1,6 +1,11 @@
 from __future__ import annotations
 import json
-import logging, os, re, sys, uuid, time
+import logging
+import os 
+import re 
+import sys 
+import uuid 
+import time
 from dataclasses import dataclass, field
 from typing import Any, Dict, Iterable, Optional
 from contextvars import ContextVar
@@ -127,15 +132,20 @@ def configure(
     color: Optional[bool] = None,
 ) -> None:
     _config.service = service
-    if env: _config.env = env
-    if level: _config.level = level
-    if stream: _config.stream = stream
+    if env: 
+        _config.env = env
+    if level: 
+        _config.level = level
+    if stream: 
+        _config.stream = stream
 
     _config.sample = sample if sample is not None else {}
 
     _config.tz_utc = tz_utc
-    if extra_static: _config.extra_static = extra_static
-    if color is not None: _config.color = color
+    if extra_static: 
+        _config.extra_static = extra_static
+    if color is not None: 
+        _config.color = color
 
     _config.redact_keys = set(redact_keys)
     _config.redact_patterns = [re.compile(p) for p in redact_regexes]
