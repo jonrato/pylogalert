@@ -28,16 +28,16 @@ nav:
   - How-to:
       - Redaction: howto/redaction.md
       - Sampling: howto/sampling.md
-      - Contexto: howto/context.md
-      - Exceções: howto/exceptions.md
-      - Cor (TTY/Dev): howto/color.md
+      - Context: howto/context.md
+      - Exceptions: howto/exceptions.md
+      - Color (TTY/Dev): howto/color.md
       - Timezone: howto/timezone.md
-      - EMERGENCY & Canais: howto/emergency_channels.md
-      - Notifier avançado: howto/notifier.md
+      - EMERGENCY & Channels: howto/emergency_channels.md
+      - Advanced Notifier: howto/notifier.md
   - Reference:
       - API: reference/index.md
   - Explanation:
       - Design & Filosofia: explanation/design.md
-  - Contribuindo: contributing.md
+  - contributing: contributing.md
   - Changelog: changelog.md
-  - Comparativo: comparativo.md
+  - Comparative: comparative.md
