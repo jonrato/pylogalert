@@ -1,0 +1,8 @@
+# mkdocs.yml
+site_name: pylogalert
+theme:
+  name: material
+plugins:
+  - search
+nav:
+  - Home: index.md
