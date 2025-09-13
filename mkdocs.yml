@@ -37,7 +37,7 @@ nav:
   - Reference:
       - API: reference/index.md
   - Explanation:
-      - Design & Filosofia: explanation/design.md
+      - Design & Concepts: explanation/design.md
   - contributing: contributing.md
   - Changelog: changelog.md
   - Comparative: comparative.md
