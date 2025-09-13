@@ -3,6 +3,7 @@
 **Lean JSON logging** for Python with **async-safe contextvars**, **PII redaction**, **sampling**, and **EMERGENCY alerts** (Slack, SES).  
 Designed for production services and framework integration (FastAPI, Django).
 
+📖 Full documentation: [jonrato.github.io/pylogalert](https://jonrato.github.io/pylogalert/)
 ---
 
 ## 🚀 Installation
