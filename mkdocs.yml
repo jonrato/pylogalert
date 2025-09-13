@@ -38,6 +38,6 @@ nav:
       - API: reference/index.md
   - Explanation:
       - Design & Concepts: explanation/design.md
-  - contributing: contributing.md
+  - Contributing: contributing.md
   - Changelog: changelog.md
   - Comparative: comparative.md
