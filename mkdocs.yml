@@ -1,14 +1,15 @@
 site_name: pylogalert
-site_description: Logging JSON async-safe com redaction, sampling e EMERGENCY
+site_description: "pylogalert: Python logging library with JSON output, ContextVar context, PII redaction, sampling, and EMERGENCY alerts (Slack, SES)."
+site_url: https://jonrato.github.io/pylogalert/
 repo_url: https://github.com/jonrato/pylogalert
 
 theme:
   name: material
   features:
     - navigation.tabs
-    - content.code.copy
     - navigation.top
     - toc.integrate
+    - content.code.copy
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -25,9 +26,13 @@ theme:
         icon: material/weather-sunny
         name: Switch to light mode
 
-
 plugins:
   - search
+  - sitemap:
+      changefreq: weekly
+      priority: 0.5
+  - minify:
+      minify_html: true
   - mkdocstrings:
       handlers:
         python:
@@ -36,6 +41,12 @@ plugins:
             show_signature: true
             show_root_heading: true
             show_source: false
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/jonrato/pylogalert
+
 
 nav:
   - Home: index.md
